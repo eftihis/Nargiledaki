@@ -118,6 +118,11 @@ async function loadFlavours() {
 
 // Create a flavour card element
 function createFlavourCard(flavour) {
+    // Apply theme colors if available - declare variables first
+    let cardStyle = '';
+    let textStyle = '';
+    let iconColor = '#d2d3db'; // default color
+    
     const li = document.createElement('li');
     li.className = 'flavour-card';
     
@@ -140,11 +145,6 @@ function createFlavourCard(flavour) {
         `${flavour.imageUrl}?w=400&h=500&fit=crop&auto=format` : 
         'https://via.placeholder.com/400x500?text=No+Image';
     
-    // Apply theme colors if available
-    let cardContentStyle = '';
-    let textStyle = '';
-    let iconColor = '#d2d3db'; // default color
-    
     if (flavour.colour?.hex || flavour.textColor?.hex) {
         const styles = [];
         if (flavour.colour?.hex) {
@@ -157,8 +157,13 @@ function createFlavourCard(flavour) {
             iconColor = flavour.textColor.hex + '80'; // Add 80 for 50% opacity in hex
         }
         if (styles.length > 0) {
-            cardContentStyle = `style="${styles.join('; ')}"`;
+            cardStyle = styles.join('; ');
         }
+    }
+    
+    // Apply the card style to the element
+    if (cardStyle) {
+        li.setAttribute('style', cardStyle);
     }
     
     // SVG icon with dynamic color
@@ -175,7 +180,7 @@ function createFlavourCard(flavour) {
         <div class="card-image">
             <img src="${imageUrl}" alt="${flavour.imageAlt || name}" loading="lazy">
         </div>
-        <div class="card-content" ${cardContentStyle}>
+        <div class="card-content">
             <div class="card-header">
                 <h3 class="card-title" ${textStyle}>${name}</h3>
                 <span class="card-price" ${textStyle}>€${flavour.price}</span>
@@ -223,15 +228,6 @@ function setupKeyboardNavigation() {
             
             cards[nextIndex].focus();
             cards[nextIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-        }
-    });
-    
-    // Make cards focusable
-    carousel.addEventListener('click', (e) => {
-        const card = e.target.closest('.flavour-card');
-        if (card) {
-            card.tabIndex = 0;
-            card.focus();
         }
     });
 }
