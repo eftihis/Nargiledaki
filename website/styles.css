@@ -1,0 +1,322 @@
+/* CSS Custom Properties */
+:root {
+    --cover-size-desktop: 15rem;
+    --cover-size-tablet: 9rem;
+    --cover-size-mobile: 6rem;
+    --cover-size: var(--cover-size-desktop);
+    --primary-color: #2c1810;
+    --secondary-color: #8b4513;
+    --text-color: #333;
+    --background-color: #faf8f6;
+    --border-radius: 1rem;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Header */
+.header {
+    background: var(--primary-color);
+    color: white;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.language-toggle {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.lang-btn {
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.lang-btn:hover,
+.lang-btn.active {
+    background: white;
+    color: var(--primary-color);
+}
+
+/* Main Content */
+.main {
+    padding: 2rem 0;
+}
+
+.menu-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.menu-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+}
+
+/* Carousel Container */
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    padding: 1rem 0;
+}
+
+.flavour-carousel {
+    display: flex;
+    list-style: none;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    gap: 1.5rem;
+    padding: 1rem;
+    
+    /* Hide scrollbar but keep functionality */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.flavour-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+/* Flavour Card */
+.flavour-card {
+    flex: 0 0 var(--cover-size);
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    position: relative;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.flavour-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Image */
+.card-image {
+    width: 100%;
+    height: 0;
+    padding-bottom: 125%; /* 4:5 aspect ratio */
+    position: relative;
+    overflow: hidden;
+}
+
+.card-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.flavour-card:hover .card-image img {
+    transform: scale(1.05);
+}
+
+/* Card Content */
+.card-content {
+    padding: 1rem;
+    position: relative;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0;
+    flex: 1;
+    margin-right: 0.5rem;
+}
+
+.card-price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    white-space: nowrap;
+}
+
+.card-description {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-tags {
+    display: flex;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+    flex: 1;
+}
+
+.tag {
+    background: var(--secondary-color);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+}
+
+.card-icon {
+    width: 24px;
+    height: 24px;
+    opacity: 0.6;
+    margin-left: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    :root {
+        --cover-size: var(--cover-size-tablet);
+    }
+    
+    .menu-title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --cover-size: var(--cover-size-mobile);
+    }
+    
+    .header-content {
+        padding: 0 0.5rem;
+    }
+    
+    .site-title {
+        font-size: 1.5rem;
+    }
+    
+    .menu-title {
+        font-size: 1.8rem;
+    }
+    
+    .flavour-carousel {
+        gap: 1rem;
+        padding: 0.5rem;
+    }
+    
+    .card-content {
+        padding: 0.75rem;
+    }
+    
+    .card-title {
+        font-size: 1rem;
+    }
+    
+    .card-price {
+        font-size: 1.1rem;
+    }
+    
+    .card-description {
+        font-size: 0.8rem;
+    }
+}
+
+/* CSS Scroll-Driven Animation (for modern browsers) */
+@supports (scroll-timeline: --carousel) {
+    .flavour-card {
+        animation: card-scale both linear;
+        animation-timeline: scroll(x);
+        animation-range: entry 0% exit 100%;
+    }
+    
+    @keyframes card-scale {
+        0%, 100% {
+            transform: scale(0.9);
+            opacity: 0.7;
+        }
+        50% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+}
+
+/* Loading State */
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+}
+
+.loading::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--secondary-color);
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 0.5rem;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+} 
