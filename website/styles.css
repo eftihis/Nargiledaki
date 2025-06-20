@@ -1,15 +1,11 @@
 /* CSS Custom Properties */
 :root {
-    --cover-size-desktop: 20rem;
-    --cover-size-tablet: 14rem;
-    --cover-size-mobile: 10rem;
-    --cover-size: var(--cover-size-desktop);
     --primary-color: #5E8C6B;
     --secondary-color: #8b4513;
     --text-color: #333;
     --background-color: #FFF9EE;
     --border-radius: 1rem;
-    --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --site-max-width: calc(min(1400px, 100vw) - 2rem);
 }
 
 /* Base Styles */
@@ -24,30 +20,31 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
+    width: 100%;
 }
 
 /* Header */
 .header {
     background: var(--primary-color);
-    color: white;
     padding: 1rem 0;
     position: sticky;
     top: 0;
     z-index: 100;
+
 }
 
 .header-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
+    width: var(--site-max-width);
+    margin-inline: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .site-logo {
     height: 2rem;
-    color: white;
 }
 
 .language-toggle {
@@ -57,8 +54,8 @@ body {
 
 .lang-btn {
     background: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    color: white;
+    border: 1px solid var(--background-color);
+    color: var(--background-color);
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     cursor: pointer;
@@ -67,13 +64,15 @@ body {
 
 .lang-btn:hover,
 .lang-btn.active {
-    background: white;
+    background: var(--background-color);
     color: var(--primary-color);
 }
 
 /* Main Content */
 .main {
     padding: 2rem 0;
+    max-width: 100%;
+    overflow: clip;
 }
 
 .menu-title {
@@ -87,7 +86,6 @@ body {
 .carousel-container {
     position: relative;
     padding: 1rem 0;
-    width: 100vw;
 }
 
 .flavour-carousel {
@@ -111,7 +109,6 @@ body {
     position: relative;
     background: white;
     border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
     overflow: clip;
     display: flex;
     flex-direction: column;
