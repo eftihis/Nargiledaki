@@ -4,10 +4,10 @@
     --cover-size-tablet: 14rem;
     --cover-size-mobile: 10rem;
     --cover-size: var(--cover-size-desktop);
-    --primary-color: #2c1810;
+    --primary-color: #5E8C6B;
     --secondary-color: #8b4513;
     --text-color: #333;
-    --background-color: #faf8f6;
+    --background-color: #FFF9EE;
     --border-radius: 1rem;
     --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
@@ -20,7 +20,7 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Alegreya;
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
@@ -45,9 +45,9 @@ body {
     align-items: center;
 }
 
-.site-title {
-    font-size: 1.8rem;
-    font-weight: 700;
+.site-logo {
+    height: 2rem;
+    color: white;
 }
 
 .language-toggle {
