@@ -141,25 +141,51 @@ function createFlavourCard(flavour) {
         'https://via.placeholder.com/400x500?text=No+Image';
     
     // Apply theme colors if available
-    let cardStyle = '';
-    if (flavour.colour?.hex) {
-        cardStyle = `style="border-top: 4px solid ${flavour.colour.hex};"`;
+    let cardContentStyle = '';
+    let textStyle = '';
+    let iconColor = '#d2d3db'; // default color
+    
+    if (flavour.colour?.hex || flavour.textColor?.hex) {
+        const styles = [];
+        if (flavour.colour?.hex) {
+            styles.push(`background-color: ${flavour.colour.hex}`);
+        }
+        if (flavour.textColor?.hex) {
+            styles.push(`color: ${flavour.textColor.hex}`);
+            textStyle = `style="color: ${flavour.textColor.hex};"`;
+            // Set icon color to 50% opacity of text color
+            iconColor = flavour.textColor.hex + '80'; // Add 80 for 50% opacity in hex
+        }
+        if (styles.length > 0) {
+            cardContentStyle = `style="${styles.join('; ')}"`;
+        }
     }
+    
+    // SVG icon with dynamic color
+    const shishaIcon = `
+        <svg class="shisha-icon" viewBox="0 0 19.37 26.46" xmlns="http://www.w3.org/2000/svg">
+            <path fill="${iconColor}" d="M9.68,26.46c-5.34,0-9.68-4.34-9.68-9.68v-7.09C0,4.34,4.34,0,9.68,0s9.68,4.34,9.68,9.68v7.09c0,5.34-4.34,9.68-9.68,9.68ZM9.68.48C4.61.48.48,4.61.48,9.68v7.09c0,5.08,4.13,9.21,9.21,9.21s9.21-4.13,9.21-9.21v-7.09C18.89,4.61,14.76.48,9.68.48Z"/>
+            <path fill="${iconColor}" d="M12.05,18.92c-1.66.7-3.58-.08-4.29-1.74s.08-3.58,1.74-4.29l2.54,6.03Z"/>
+            <path fill="${iconColor}" d="M7.31,6.67c1.66-.7,3.58.08,4.29,1.74.7,1.66-.08,3.58-1.74,4.29l-2.54-6.03Z"/>
+            <rect fill="${iconColor}" x="4.92" y="20.38" width="9.53" height=".63"/>
+        </svg>
+    `;
     
     li.innerHTML = `
         <div class="card-image">
             <img src="${imageUrl}" alt="${flavour.imageAlt || name}" loading="lazy">
         </div>
-        <div class="card-content" ${cardStyle}>
+        <div class="card-content" ${cardContentStyle}>
             <div class="card-header">
-                <h3 class="card-title">${name}</h3>
-                <span class="card-price">€${flavour.price}</span>
+                <h3 class="card-title" ${textStyle}>${name}</h3>
+                <span class="card-price" ${textStyle}>€${flavour.price}</span>
             </div>
-            <p class="card-description">${description}</p>
+            <p class="card-description" ${textStyle}>${description}</p>
             <div class="card-footer">
                 <div class="card-tags">${tagsHtml}</div>
                 ${iconHtml}
             </div>
+            ${shishaIcon}
         </div>
     `;
     
