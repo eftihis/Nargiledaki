@@ -5,7 +5,7 @@
     --text-color: #333;
     --background-color: #FFF9EE;
     --border-radius: 1rem;
-    --site-max-width: calc(min(1400px, 100vw) - 2rem);
+    --content-max-width: calc(min(1400px, 100vw) - 2rem);
 }
 
 /* Base Styles */
@@ -34,7 +34,7 @@ body {
 }
 
 .header-content {
-    width: var(--site-max-width);
+    width: var(--content-max-width);
     margin-inline: auto;
     display: flex;
     justify-content: space-between;
@@ -94,11 +94,12 @@ body {
     grid-auto-flow: column;
     grid-auto-columns: 20rem;
     overflow-x: auto;
-    overscroll-behavior-inline: contain;
+    overscroll-behavior-inline: auto;
     scroll-snap-type: x mandatory;
     scroll-snap-align: center;
     list-style: none;
-    padding: 2rem;
+    padding-inline: calc(100% - 50% - 10rem);
+    padding-block: 2rem;
     
 }
 
@@ -107,11 +108,11 @@ body {
     scroll-snap-align: center;
     scroll-snap-stop: always;
     position: relative;
-    background: white;
     border-radius: var(--border-radius);
     overflow: clip;
     display: flex;
     flex-direction: column;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 /* Card Image */
