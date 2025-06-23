@@ -124,7 +124,10 @@ function createFlavourCard(flavour) {
     let iconColor = '#d2d3db'; // default color
     
     const li = document.createElement('li');
-    li.className = 'flavour-card';
+    li.className = 'card-wrapper';
+    
+    const cardDiv = document.createElement('div');
+    cardDiv.className = 'flavour-card';
     
     // Get localized content
     const name = getLocalizedText(flavour.name);
@@ -161,9 +164,9 @@ function createFlavourCard(flavour) {
         }
     }
     
-    // Apply the card style to the element
+    // Apply the card style to the div element
     if (cardStyle) {
-        li.setAttribute('style', cardStyle);
+        cardDiv.setAttribute('style', cardStyle);
     }
     
     // SVG icon with dynamic color
@@ -176,7 +179,7 @@ function createFlavourCard(flavour) {
         </svg>
     `;
     
-    li.innerHTML = `
+    cardDiv.innerHTML = `
         <div class="card-image">
             <img src="${imageUrl}" alt="${flavour.imageAlt || name}" loading="lazy">
         </div>
@@ -193,6 +196,9 @@ function createFlavourCard(flavour) {
             ${shishaIcon}
         </div>
     `;
+    
+    // Append the card div to the wrapper li
+    li.appendChild(cardDiv);
     
     return li;
 }

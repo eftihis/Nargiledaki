@@ -86,33 +86,55 @@ body {
 .carousel-container {
     position: relative;
     padding: 1rem 0;
+    perspective: 40em;
 }
 
 .flavour-carousel {
     display: grid;
-    gap: 2rem;
+    gap: 1rem;
     grid-auto-flow: column;
     grid-auto-columns: 20rem;
     overflow-x: auto;
     overscroll-behavior-inline: auto;
     scroll-snap-type: x mandatory;
-    scroll-snap-align: center;
     list-style: none;
     padding-inline: calc(100% - 50% - 10rem);
-    padding-block: 2rem;
-    
+    padding-block: 4rem;
+}
+
+/* Flavour Card Wrapper */
+.card-wrapper {
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    container-type: scroll-state;
+    list-style: none;
 }
 
 /* Flavour Card */
 .flavour-card {
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
     position: relative;
     border-radius: var(--border-radius);
-    overflow: clip;
     display: flex;
     flex-direction: column;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    /* Default state for mobile: flat with clipped overflow */
+    overflow: clip;
+    transition: transform 0.3s ease;
+}
+
+/* Container query to scale the entire card when its wrapper is snapped */
+@supports (container-type: scroll-state) {
+    /* Ensure smooth transition regardless of snapped state */
+    .card-wrapper > .flavour-card {
+        transition: transform 0.3s ease;
+    }
+}
+
+/* Apply scaling only while the wrapper is snapped on the inline axis */
+@container scroll-state(snapped: x) {
+    .card-wrapper > .flavour-card {
+        transform: scale(1.3);
+    }
 }
 
 /* Card Image */
@@ -121,7 +143,9 @@ body {
     height: auto;
     aspect-ratio: 4/5;
     position: relative;
+    overflow: clip;
 }
+/* End of Selection */
 
 .card-image img {
     position: absolute;
@@ -235,8 +259,26 @@ body {
     margin-left: 0.5rem;
 }
 
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
+/* Scroll-driven cover-flow animation */
+@media (min-width: 1024px) {
+
+
+    .flavour-carousel {
+        gap: 4rem;
     }
-} 
+
+    .flavour-card {
+        will-change: transform;
+ /* Apply the scroll-driven animation */
+        animation: rotate-cover linear both;
+        animation-timeline: view(inline);
+    }
+
+    @keyframes rotate-cover {
+        0%   { transform: translateX(-100%); }
+        35%  { transform: translateX(0); }
+        50%  { transform: scale(1); }
+        65%  { transform: translateX(0); }
+        100% { transform: translateX(100%); }   
+    }
+}
