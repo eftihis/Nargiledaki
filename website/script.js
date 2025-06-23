@@ -37,6 +37,124 @@ function addToCart(id, quantity = 1) {
     cart[id] = (cart[id] || 0) + quantity;
     saveCart();
     updateCartCount();
+    if (cartOverlay.classList.contains('open')) {
+        updateCartDisplay();
+    }
+}
+
+function removeFromCart(id, quantity = 1) {
+    if (!id || !cart[id]) return;
+    cart[id] = Math.max(0, cart[id] - quantity);
+    if (cart[id] === 0) {
+        delete cart[id];
+    }
+    saveCart();
+    updateCartCount();
+    if (cartOverlay.classList.contains('open')) {
+        updateCartDisplay();
+    }
+}
+
+function removeCartItem(id) {
+    if (!id || !cart[id]) return;
+    delete cart[id];
+    saveCart();
+    updateCartCount();
+    if (cartOverlay.classList.contains('open')) {
+        updateCartDisplay();
+    }
+}
+
+function updateCartDisplay() {
+    const list = cartOverlay.querySelector('.cart-items');
+    if (!list) return;
+    
+    let total = 0;
+    list.innerHTML = '';
+    
+    for (const [id, qty] of Object.entries(cart)) {
+        const flavour = allFlavours.find(f => f._id === id);
+        if (!flavour) continue;
+        const itemName = getLocalizedText(flavour.name);
+        const itemTotal = (flavour.price * qty);
+        total += itemTotal;
+
+        const li = document.createElement('li');
+        li.className = 'cart-item';
+        li.innerHTML = `
+            <div class="cart-item-info">
+                <span class="cart-item-name">${itemName}</span>
+                <span class="cart-item-price">€${flavour.price}</span>
+            </div>
+            <div class="cart-item-controls">
+                <button class="cart-qty-btn minus" data-id="${id}">
+                    <span class="material-icons">remove</span>
+                </button>
+                <span class="cart-qty">${qty}</span>
+                <button class="cart-qty-btn plus" data-id="${id}">
+                    <span class="material-icons">add</span>
+                </button>
+                <button class="cart-remove-btn" data-id="${id}">
+                    <span class="material-icons">delete</span>
+                </button>
+            </div>
+        `;
+        list.appendChild(li);
+    }
+    
+    // Update total
+    const totalEl = cartOverlay.querySelector('.cart-total');
+    if (totalEl) {
+        totalEl.textContent = `Total: €${total.toFixed(2)}`;
+    }
+    
+    // Show empty message if no items
+    if (list.children.length === 0) {
+        // Remove total element if it exists
+        if (totalEl) {
+            totalEl.remove();
+        }
+        
+        const empty = document.createElement('p');
+        empty.textContent = 'Your cart is empty.';
+        empty.style.textAlign = 'center';
+        empty.style.color = 'var(--text-color-muted)';
+        empty.style.marginTop = 'auto';
+        cartOverlay.appendChild(empty);
+    } else {
+        // Re-add event listeners only if there are items
+        addCartItemListeners(list);
+    }
+}
+
+function addCartItemListeners(list) {
+    const minusBtns = list.querySelectorAll('.cart-qty-btn.minus');
+    const plusBtns = list.querySelectorAll('.cart-qty-btn.plus');
+    const removeBtns = list.querySelectorAll('.cart-remove-btn');
+    
+    minusBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const id = btn.dataset.id;
+            removeFromCart(id, 1);
+        });
+    });
+    
+    plusBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const id = btn.dataset.id;
+            addToCart(id, 1);
+        });
+    });
+    
+    removeBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const id = btn.dataset.id;
+            removeCartItem(id);
+        });
+    });
 }
 
 function buildCartOverlay() {
@@ -46,7 +164,7 @@ function buildCartOverlay() {
     // Close button
     const closeBtn = document.createElement('button');
     closeBtn.className = 'close-cart';
-    closeBtn.innerText = '✖';
+    closeBtn.innerHTML = '<span class="material-icons">close</span>';
     closeBtn.addEventListener('click', () => cartOverlay.classList.remove('open'));
     cartOverlay.appendChild(closeBtn);
 
@@ -63,7 +181,24 @@ function buildCartOverlay() {
 
         const li = document.createElement('li');
         li.className = 'cart-item';
-        li.textContent = `${itemName} × ${qty} — €${itemTotal.toFixed(2)}`;
+        li.innerHTML = `
+            <div class="cart-item-info">
+                <span class="cart-item-name">${itemName}</span>
+                <span class="cart-item-price">€${flavour.price}</span>
+            </div>
+            <div class="cart-item-controls">
+                <button class="cart-qty-btn minus" data-id="${id}">
+                    <span class="material-icons">remove</span>
+                </button>
+                <span class="cart-qty">${qty}</span>
+                <button class="cart-qty-btn plus" data-id="${id}">
+                    <span class="material-icons">add</span>
+                </button>
+                <button class="cart-remove-btn" data-id="${id}">
+                    <span class="material-icons">delete</span>
+                </button>
+            </div>
+        `;
         list.appendChild(li);
     }
 
@@ -74,11 +209,20 @@ function buildCartOverlay() {
         totalEl.className = 'cart-total';
         totalEl.textContent = `Total: €${total.toFixed(2)}`;
         cartOverlay.appendChild(totalEl);
+        
+        // Add event listeners for cart item controls
+        addCartItemListeners(list);
     } else {
         const empty = document.createElement('p');
         empty.textContent = 'Your cart is empty.';
+        empty.style.textAlign = 'center';
+        empty.style.color = 'var(--text-color-muted)';
         cartOverlay.appendChild(empty);
     }
+}
+
+function closeCart() {
+    cartOverlay.classList.remove('open');
 }
 
 if (cartBtn) {
@@ -89,6 +233,22 @@ if (cartBtn) {
         }
     });
 }
+
+// Close cart when clicking outside
+document.addEventListener('click', (e) => {
+    if (cartOverlay.classList.contains('open') && 
+        !cartOverlay.contains(e.target) && 
+        !cartBtn.contains(e.target)) {
+        closeCart();
+    }
+});
+
+// Close cart with ESC key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && cartOverlay.classList.contains('open')) {
+        closeCart();
+    }
+});
 
 // GROQ query to fetch flavours with all needed data
 const FLAVOURS_QUERY = `
