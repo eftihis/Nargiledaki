@@ -10,6 +10,86 @@ let currentLanguage = 'en';
 const carousel = document.getElementById('flavour-carousel');
 const langButtons = document.querySelectorAll('.lang-btn');
 
+// ----------------- Shopping Cart State -----------------
+const cartBtn = document.getElementById('cart-btn');
+const cartOverlay = document.getElementById('cart-overlay');
+
+let cart = JSON.parse(localStorage.getItem('cart') || '{}'); // { flavourId: quantity }
+let allFlavours = []; // will be populated after flavours load
+
+function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function getCartCount() {
+    return Object.values(cart).reduce((sum, qty) => sum + qty, 0);
+}
+
+function updateCartCount() {
+    const countEl = document.getElementById('cart-count');
+    if (countEl) {
+        countEl.textContent = getCartCount();
+    }
+}
+
+function addToCart(id, quantity = 1) {
+    if (!id || quantity <= 0) return;
+    cart[id] = (cart[id] || 0) + quantity;
+    saveCart();
+    updateCartCount();
+}
+
+function buildCartOverlay() {
+    if (!cartOverlay) return;
+    cartOverlay.innerHTML = '';
+
+    // Close button
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'close-cart';
+    closeBtn.innerText = '✖';
+    closeBtn.addEventListener('click', () => cartOverlay.classList.remove('open'));
+    cartOverlay.appendChild(closeBtn);
+
+    const list = document.createElement('ul');
+    list.className = 'cart-items';
+
+    let total = 0;
+    for (const [id, qty] of Object.entries(cart)) {
+        const flavour = allFlavours.find(f => f._id === id);
+        if (!flavour) continue;
+        const itemName = getLocalizedText(flavour.name);
+        const itemTotal = (flavour.price * qty);
+        total += itemTotal;
+
+        const li = document.createElement('li');
+        li.className = 'cart-item';
+        li.textContent = `${itemName} × ${qty} — €${itemTotal.toFixed(2)}`;
+        list.appendChild(li);
+    }
+
+    if (list.children.length) {
+        cartOverlay.appendChild(list);
+
+        const totalEl = document.createElement('p');
+        totalEl.className = 'cart-total';
+        totalEl.textContent = `Total: €${total.toFixed(2)}`;
+        cartOverlay.appendChild(totalEl);
+    } else {
+        const empty = document.createElement('p');
+        empty.textContent = 'Your cart is empty.';
+        cartOverlay.appendChild(empty);
+    }
+}
+
+if (cartBtn) {
+    cartBtn.addEventListener('click', () => {
+        cartOverlay.classList.toggle('open');
+        if (cartOverlay.classList.contains('open')) {
+            buildCartOverlay();
+        }
+    });
+}
+
 // GROQ query to fetch flavours with all needed data
 const FLAVOURS_QUERY = `
 *[_type == "flavour"] | order(order asc) {
@@ -35,6 +115,7 @@ const FLAVOURS_QUERY = `
 async function init() {
     setupLanguageToggle();
     await loadFlavours();
+    updateCartCount();
 }
 
 // Setup language toggle functionality
@@ -97,6 +178,9 @@ async function loadFlavours() {
     
     try {
         const flavours = await fetchFlavours();
+        
+        // store globally for cart reference
+        allFlavours = flavours;
         
         if (flavours.length === 0) {
             carousel.innerHTML = '<li class="loading">No flavours found</li>';
@@ -193,12 +277,44 @@ function createFlavourCard(flavour) {
                 <div class="card-tags">${tagsHtml}</div>
                 ${iconHtml}
             </div>
-            ${shishaIcon}
+            <div class="card-bottom">
+                ${shishaIcon}
+                <div class="card-cart">
+                    <button class="qty-btn minus" type="button">-</button>
+                    <input type="number" class="qty-input" value="1" min="1">
+                    <button class="qty-btn plus" type="button">+</button>
+                    <button class="add-cart-btn" type="button" aria-label="Add to cart">
+                        <span class="material-icons">add_shopping_cart</span>
+                    </button>
+                </div>
+            </div>
         </div>
     `;
     
     // Append the card div to the wrapper li
     li.appendChild(cardDiv);
+    
+    // --------- Quantity & Cart Event Listeners ---------
+    const minusBtn = cardDiv.querySelector('.qty-btn.minus');
+    const plusBtn = cardDiv.querySelector('.qty-btn.plus');
+    const qtyInput = cardDiv.querySelector('.qty-input');
+    const addBtn = cardDiv.querySelector('.add-cart-btn');
+
+    minusBtn.addEventListener('click', () => {
+        const current = parseInt(qtyInput.value) || 1;
+        if (current > 1) qtyInput.value = current - 1;
+    });
+
+    plusBtn.addEventListener('click', () => {
+        const current = parseInt(qtyInput.value) || 1;
+        qtyInput.value = current + 1;
+    });
+
+    addBtn.addEventListener('click', () => {
+        const quantity = parseInt(qtyInput.value) || 1;
+        addToCart(flavour._id, quantity);
+        qtyInput.value = 1; // reset after adding
+    });
     
     return li;
 }
