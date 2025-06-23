@@ -27,7 +27,8 @@ body {
 .header {
     background: var(--primary-color);
     padding: 1rem 0;
-    position: sticky;
+    position: fixed;
+    width: 100%;
     top: 0;
     z-index: 100;
 
@@ -86,7 +87,10 @@ body {
 .carousel-container {
     position: relative;
     padding: 1rem 0;
-    perspective: 40em;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .flavour-carousel {
@@ -126,14 +130,17 @@ body {
 @supports (container-type: scroll-state) {
     /* Ensure smooth transition regardless of snapped state */
     .card-wrapper > .flavour-card {
-        transition: transform 0.3s ease;
+        transition: scale 0.3s ease;
+        transition-delay: 0.1s;
     }
 }
 
 /* Apply scaling only while the wrapper is snapped on the inline axis */
 @container scroll-state(snapped: x) {
     .card-wrapper > .flavour-card {
-        transform: scale(1.3);
+        scale: 1.125;
+        z-index: 100;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     }
 }
 
@@ -277,7 +284,7 @@ body {
     @keyframes rotate-cover {
         0%   { transform: translateX(-100%); }
         35%  { transform: translateX(0); }
-        50%  { transform: scale(1); }
+        50%  { transform: translateX(0); }
         65%  { transform: translateX(0); }
         100% { transform: translateX(100%); }   
     }
