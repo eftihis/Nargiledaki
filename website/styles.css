@@ -139,11 +139,65 @@ body {
     color: var(--text-color-light);
 }
 
+/* Phone Section */
+.phone-section {
+    background: var(--background-color);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+    position: fixed;
+    width: 100%;
+    top: 4.5rem; /* Position below the header */
+    z-index: 90; /* Below header but above content */
+}
+
+.phone-section {
+    @media (prefers-reduced-motion: no-preference) {
+        animation: phone--leaveview 0.5s linear both;
+        animation-timeline: scroll(root);
+        animation-range: 0 10vh;
+    }
+}
+
+.phone-content {
+    width: var(--content-max-width);
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+}
+
+.phone-content:hover {
+    opacity: 0.8;
+}
+
+.phone-content .material-icons {
+    font-size: 1rem;
+    color: var(--text-color-muted);
+}
+
+.phone-number {
+    color: var(--text-color-muted);
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.phone-number:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
 /* Main Content */
 .main {
     padding: 2rem 0;
     max-width: 100%;
     overflow: clip;
+    margin-top: 5rem; /* Account for fixed header + phone section */
 }
 
 .menu-title {
@@ -225,10 +279,15 @@ body {
         transition-delay: 0.1s;
     }
 
-    @container not scroll-state(snapped: x) {
+    .card-wrapper > .flavour-card .card-cart {
+        opacity: 0.2;
+        pointer-events: none;
+    }
+
+    @container scroll-state(snapped: x) {
         .card-wrapper > .flavour-card .card-cart {
-            opacity: 0.2;
-            pointer-events: none;
+            opacity: 1;
+            pointer-events: auto;
         }
     }
 }
@@ -383,6 +442,14 @@ body {
         100% { transform: translateX(100%); }   
     }
 }
+
+@keyframes phone--leaveview {
+    to {
+        opacity: 0;
+        translate: 0 -20px;
+    }
+}
+
 
 /* ------------------ Shopping Cart Styles ------------------ */
 
