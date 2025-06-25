@@ -28,7 +28,15 @@ function getCartCount() {
 function updateCartCount() {
     const countEl = document.getElementById('cart-count');
     if (countEl) {
-        countEl.textContent = getCartCount();
+        const count = getCartCount();
+        countEl.textContent = count;
+        
+        // Hide cart count when count is 0, show when count > 0
+        if (count === 0) {
+            countEl.style.display = 'none';
+        } else {
+            countEl.style.display = 'block';
+        }
     }
 }
 

@@ -166,7 +166,7 @@ body {
 .flavour-carousel {
     display: grid;
     height: 100%;
-    gap: 1rem;
+    gap: 2rem;
     grid-auto-flow: column;
     grid-auto-columns: min(20rem, 80vw);
     overflow-x: auto;
@@ -185,13 +185,14 @@ body {
     list-style: none;
 }
 
+/* Start of Selection */
 /* Flavour Card */
 .flavour-card {
     position: relative;
     border-radius: var(--border-radius);
     display: flex;
     flex-direction: column;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     /* Default state for mobile: flat with clipped overflow */
     overflow: clip;
     transition: transform 0.3s ease;
@@ -203,18 +204,18 @@ body {
 
     /* Ensure smooth transition regardless of snapped state */
     .card-wrapper>.flavour-card {
-        transition: scale 0.3s ease;
+        transition: scale 0.3s ease, box-shadow 0.3s ease;
         transition-delay: 0.1s;
     }
 
     @container scroll-state(snapped: x) {
         .card-wrapper>.flavour-card {
             scale: 1.125;
-            z-index: 1;
-            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
         }
     }
 }
+/* End of Selection */
 
 
 /* Apply opacity to card-cart when NOT snapped */
@@ -363,6 +364,10 @@ body {
 /* Scroll-driven cover-flow animation */
 @media (min-width: 1024px) {
 
+    .flavour-carousel {
+        gap: 5rem;
+    }
+
     .flavour-card {
         will-change: transform;
  /* Apply the scroll-driven animation */
@@ -413,8 +418,7 @@ body {
     color: #fff;
     border-radius: 4px;
     font-size: 0.65rem;
-    padding: 0 0.3rem;
-    height: 1rem;
+    padding: 0.1rem 0.2rem;
     min-width: auto;
     display: flex;
     align-items: center;
