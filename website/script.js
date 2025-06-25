@@ -155,8 +155,14 @@ function updateCartDisplay() {
         `;
         whatsappBtn.addEventListener('click', () => {
             const message = formatWhatsAppMessage();
-            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            const whatsappUrl = `https://wa.me/306986793504?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
+            
+            // Empty the cart after sending the order
+            cart = {};
+            saveCart();
+            updateCartCount();
+            updateCartDisplay();
         });
         cartOverlay.appendChild(whatsappBtn);
         
@@ -261,8 +267,14 @@ function buildCartOverlay() {
         `;
         whatsappBtn.addEventListener('click', () => {
             const message = formatWhatsAppMessage();
-            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            const whatsappUrl = `https://wa.me/306986793504?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
+            
+            // Empty the cart after sending the order
+            cart = {};
+            saveCart();
+            updateCartCount();
+            updateCartDisplay();
         });
         cartOverlay.appendChild(whatsappBtn);
         
@@ -581,7 +593,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function formatWhatsAppMessage() {
-    const orderTitle = currentLanguage === 'el' ? '🍃 *Παραγγελία Nargiledaki*' : '🍃 *Nargiledaki Order*';
+    const orderTitle = currentLanguage === 'el' ? '*Παραγγελία Nargiledaki*' : '*Nargiledaki Order*';
     let message = `${orderTitle}\n\n`;
     
     let total = 0;
@@ -597,8 +609,8 @@ function formatWhatsAppMessage() {
     
     const totalText = currentLanguage === 'el' ? 'Σύνολο' : 'Total';
     const closingText = currentLanguage === 'el' 
-        ? 'Παρακαλώ επιβεβαιώστε την παραγγελία μου και δώστε μου λεπτομέρειες παράδοσης. Ευχαριστώ! 🚀'
-        : 'Please confirm my order and provide delivery details. Thank you! 🚀';
+        ? 'Παρακαλώ επιβεβαιώστε την παραγγελία μου και δώστε μου λεπτομέρειες παράδοσης. Ευχαριστώ!'
+        : 'Please confirm my order and provide delivery details. Thank you!';
     
     message += `\n*${totalText}: €${total.toFixed(2)}*\n\n`;
     message += closingText;
