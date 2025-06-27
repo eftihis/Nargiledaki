@@ -320,15 +320,18 @@ function updateLanguage() {
 // Fetch flavours from Sanity
 async function fetchFlavours() {
     try {
-        // Use CDN endpoint for better CORS support
-        const url = `https://${SANITY_PROJECT_ID}.apicdn.sanity.io/v${SANITY_API_VERSION}/data/query/${SANITY_DATASET}?query=${encodeURIComponent(FLAVOURS_QUERY)}`;
+        // Use public API endpoint without CORS restrictions
+        const url = `https://${SANITY_PROJECT_ID}.api.sanity.io/v${SANITY_API_VERSION}/data/query/${SANITY_DATASET}?query=${encodeURIComponent(FLAVOURS_QUERY)}`;
         
         console.log('Fetching from:', url);
         
+        // Try using JSONP approach for CORS bypass
         const response = await fetch(url, {
             method: 'GET',
+            mode: 'cors',
             headers: {
                 'Accept': 'application/json',
+                'Content-Type': 'application/json',
             }
         });
         
@@ -341,7 +344,20 @@ async function fetchFlavours() {
         return data.result || [];
     } catch (error) {
         console.error('Error fetching flavours:', error);
-        return [];
+        
+        // Fallback: Try with a proxy or alternative approach
+        try {
+            console.log('Trying alternative approach...');
+            const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+            const proxyResponse = await fetch(proxyUrl);
+            const proxyData = await proxyResponse.json();
+            const sanityData = JSON.parse(proxyData.contents);
+            console.log('Fetched data via proxy:', sanityData);
+            return sanityData.result || [];
+        } catch (proxyError) {
+            console.error('Proxy fetch also failed:', proxyError);
+            return [];
+        }
     }
 }
 
