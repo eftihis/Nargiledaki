@@ -320,14 +320,24 @@ function updateLanguage() {
 // Fetch flavours from Sanity
 async function fetchFlavours() {
     try {
-        const url = `https://${SANITY_PROJECT_ID}.api.sanity.io/v${SANITY_API_VERSION}/data/query/${SANITY_DATASET}?query=${encodeURIComponent(FLAVOURS_QUERY)}`;
+        // Use CDN endpoint for better CORS support
+        const url = `https://${SANITY_PROJECT_ID}.apicdn.sanity.io/v${SANITY_API_VERSION}/data/query/${SANITY_DATASET}?query=${encodeURIComponent(FLAVOURS_QUERY)}`;
         
-        const response = await fetch(url);
+        console.log('Fetching from:', url);
+        
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+            }
+        });
+        
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
         }
         
         const data = await response.json();
+        console.log('Fetched data:', data);
         return data.result || [];
     } catch (error) {
         console.error('Error fetching flavours:', error);
