@@ -210,7 +210,6 @@ body {
 /* Carousel Container */
 .carousel-container {
     position: relative;
-    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -221,7 +220,7 @@ body {
     height: 100%;
     gap: 2rem;
     grid-auto-flow: column;
-    grid-auto-columns: min(20rem, 80vw);
+    grid-auto-columns: min(20rem, 70vw);
     overflow-x: auto;
     overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
@@ -257,7 +256,7 @@ body {
         /* Position at bottom of carousel content, not the padding */
         /* Start of Selection */
         position: absolute;
-        inset-block-end: 4rem; /* 2rem from the bottom of content area */
+        inset-block-end: 0rem; /* 2rem from the bottom of content area */
         inset-inline: 0; /* Full width for centering */
         
         /* Center horizontally */
@@ -271,6 +270,7 @@ body {
         align-items: center;
         flex-wrap: wrap;
         gap: 12px;
+        padding-inline: 1rem;
         /* Handle overflow if too many markers */
         overflow: auto;
         overscroll-behavior-x: contain;
