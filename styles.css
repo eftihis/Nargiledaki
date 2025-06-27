@@ -210,7 +210,6 @@ body {
 /* Carousel Container */
 .carousel-container {
     position: relative;
-    padding: 1rem 0;
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -224,11 +223,74 @@ body {
     grid-auto-flow: column;
     grid-auto-columns: min(20rem, 80vw);
     overflow-x: auto;
-    overscroll-behavior-inline: auto;
+    overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
     list-style: none;
     padding-inline: calc(100% - 50% - 10rem);
     padding-block: 8rem;
+    width: 100vw; /* Full viewport width */
+    
+    /* Smooth scrolling with motion preference */
+    @media (prefers-reduced-motion: no-preference) {
+        scroll-behavior: smooth;
+    }
+    
+    /* Snap to center */
+    & li {
+        scroll-snap-align: center;
+    }
+    
+    /* Scroll button styles */
+    &::scroll-button(*) {
+        /* Make them round and easy to press */
+        inline-size: 3rem;
+        aspect-ratio: 1;
+        border-radius: 1e3px;
+        border: 2px solid var(--border-color-strong);
+        background: var(--primary-color);
+        color: var(--text-color-light);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        
+        /* Position absolutely over the carousel */
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15),rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+        
+        /* Space from edges */
+        margin: 0;
+    }
+    
+    &::scroll-button(*):focus-visible {
+        outline: 2px solid var(--border-color-strong);
+        outline-offset: 5px;
+    }
+    
+    &::scroll-button(*):not(:disabled):is(:hover, :active) {
+        background: var(--primary-color-dark);
+        border-color: var(--primary-color-dark);
+    }
+    
+    &::scroll-button(*):not(:disabled):active {
+        scale: 90%;
+    }
+    
+    &::scroll-button(*):disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+    
+    &::scroll-button(left) {
+        content: "⬅" / "Scroll Left";
+        left: 1rem; /* Position from left edge */
+    }
+    
+    &::scroll-button(right) {
+        content: "⮕" / "Scroll Right";
+        right: 1rem; /* Position from right edge */
+    }
 }
 
 /* Flavour Card Wrapper */
@@ -259,7 +321,7 @@ body {
     /* Ensure smooth transition regardless of snapped state */
     .card-wrapper>.flavour-card {
         transition: scale 0.3s ease, box-shadow 0.3s ease;
-        transition-delay: 0.1s;
+        transition-delay: 0s;
     }
 
     @container scroll-state(snapped: x) {
