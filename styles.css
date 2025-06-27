@@ -226,6 +226,15 @@ body {
     overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
     list-style: none;
+    
+    /* Hide scrollbar completely */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    
+    /* Hide scrollbar for WebKit browsers (Chrome, Safari, Edge) */
+    &::-webkit-scrollbar {
+        display: none;
+    }
     padding-inline: calc(100% - 50% - 10rem);
     padding-block: 8rem;
     width: 100vw; /* Full viewport width */
@@ -238,6 +247,71 @@ body {
     /* Snap to center */
     & li {
         scroll-snap-align: center;
+    }
+    
+    /* Create scroll markers */
+    scroll-marker-group: before;
+    
+    /* Scroll marker group container */
+    &::scroll-marker-group {
+        /* Position at bottom of carousel content, not the padding */
+        /* Start of Selection */
+        position: absolute;
+        inset-block-end: 4rem; /* 2rem from the bottom of content area */
+        inset-inline: 0; /* Full width for centering */
+        
+        /* Center horizontally */
+        margin-inline: auto;
+        width: fit-content;
+        z-index: 20;
+        
+        /* Horizontal flex layout for dots */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        /* Handle overflow if too many markers */
+        overflow: auto;
+        overscroll-behavior-x: contain;
+        scrollbar-width: none;
+        scroll-snap-type: x mandatory;
+        
+        @media (prefers-reduced-motion: no-preference) {
+            scroll-behavior: smooth;
+        }
+        /* End of Selection */
+    }
+    
+    /* Individual markers for each card */
+    & > li::scroll-marker {
+        content: " "; /* Empty content creates the marker */
+        
+        /* Style as circular dots */
+        width: 0.75rem;
+        height: 0.75rem;
+        border: 1px solid var(--border-color-strong);
+        border-radius: 50%;
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        outline-offset: 2px;
+        -webkit-tap-highlight-color: transparent;
+        
+        /* Snap if marker group overflows */
+        scroll-snap-align: center;
+    }
+    
+    /* Hover and focus states */
+    & > li::scroll-marker:is(:hover, :focus-visible) {
+        border-color: var(--primary-color);
+        background: var(--primary-color / 0.2);
+    }
+    
+    /* Active state when marker's target is in view */
+    & > li::scroll-marker:target-current {
+        background: var(--primary-color);
+        border-color: var(--primary-color);
     }
     
     /* Scroll button styles */
