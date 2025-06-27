@@ -557,7 +557,7 @@ body {
 }
 
 /* Scroll-driven cover-flow animation */
-@media (min-width: 1024px) {
+@media (min-width: 1550px) {
 
     .flavour-carousel {
         gap: 5rem;
