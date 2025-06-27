@@ -317,49 +317,25 @@ function updateLanguage() {
     }
 }
 
-// Fetch flavours from Sanity
+// Fetch flavours from Sanity using CORS proxy
 async function fetchFlavours() {
     try {
-        // Use public API endpoint without CORS restrictions
-        const url = `https://${SANITY_PROJECT_ID}.api.sanity.io/v${SANITY_API_VERSION}/data/query/${SANITY_DATASET}?query=${encodeURIComponent(FLAVOURS_QUERY)}`;
+        console.log('Fetching flavours via CORS proxy...');
+        const sanityUrl = `https://${SANITY_PROJECT_ID}.api.sanity.io/v${SANITY_API_VERSION}/data/query/${SANITY_DATASET}?query=${encodeURIComponent(FLAVOURS_QUERY)}`;
+        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(sanityUrl)}`;
         
-        console.log('Fetching from:', url);
-        
-        // Try using JSONP approach for CORS bypass
-        const response = await fetch(url, {
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            }
-        });
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
+        const proxyResponse = await fetch(proxyUrl);
+        if (!proxyResponse.ok) {
+            throw new Error(`Proxy error! status: ${proxyResponse.status} - ${proxyResponse.statusText}`);
         }
         
-        const data = await response.json();
-        console.log('Fetched data:', data);
-        return data.result || [];
+        const proxyData = await proxyResponse.json();
+        const sanityData = JSON.parse(proxyData.contents);
+        console.log('Successfully fetched', sanityData.result?.length || 0, 'flavours');
+        return sanityData.result || [];
     } catch (error) {
         console.error('Error fetching flavours:', error);
-        
-        // Fallback: Try with a proxy or alternative approach
-        try {
-            console.log('Trying alternative approach...');
-            const sanityUrl = `https://${SANITY_PROJECT_ID}.api.sanity.io/v${SANITY_API_VERSION}/data/query/${SANITY_DATASET}?query=${encodeURIComponent(FLAVOURS_QUERY)}`;
-            const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(sanityUrl)}`;
-            console.log('Proxy URL:', proxyUrl);
-            const proxyResponse = await fetch(proxyUrl);
-            const proxyData = await proxyResponse.json();
-            const sanityData = JSON.parse(proxyData.contents);
-            console.log('Fetched data via proxy:', sanityData);
-            return sanityData.result || [];
-        } catch (proxyError) {
-            console.error('Proxy fetch also failed:', proxyError);
-            return [];
-        }
+        return [];
     }
 }
 
