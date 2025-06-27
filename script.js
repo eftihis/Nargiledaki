@@ -155,7 +155,7 @@ function updateCartDisplay() {
         `;
         whatsappBtn.addEventListener('click', () => {
             const message = formatWhatsAppMessage();
-            const whatsappUrl = `https://wa.me/00306908978827?text=${encodeURIComponent(message)}`;
+            const whatsappUrl = `https://wa.me/306908978827?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
             
             // Empty the cart after sending the order
@@ -267,7 +267,7 @@ function buildCartOverlay() {
         `;
         whatsappBtn.addEventListener('click', () => {
             const message = formatWhatsAppMessage();
-            const whatsappUrl = `https://wa.me/00306908978827?text=${encodeURIComponent(message)}`;
+            const whatsappUrl = `https://wa.me/306908978827?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
             
             // Empty the cart after sending the order
