@@ -348,7 +348,9 @@ async function fetchFlavours() {
         // Fallback: Try with a proxy or alternative approach
         try {
             console.log('Trying alternative approach...');
-            const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+            const sanityUrl = `https://${SANITY_PROJECT_ID}.api.sanity.io/v${SANITY_API_VERSION}/data/query/${SANITY_DATASET}?query=${encodeURIComponent(FLAVOURS_QUERY)}`;
+            const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(sanityUrl)}`;
+            console.log('Proxy URL:', proxyUrl);
             const proxyResponse = await fetch(proxyUrl);
             const proxyData = await proxyResponse.json();
             const sanityData = JSON.parse(proxyData.contents);
