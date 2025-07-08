@@ -91,8 +91,10 @@ function updateCartDisplay() {
         li.className = 'cart-item';
         li.innerHTML = `
             <div class="cart-item-info">
-                <span class="cart-item-name">${itemName}</span>
-                <span class="cart-item-price">€${flavour.price}</span>
+                <div class="cart-item-details">
+                    <span class="cart-item-name">${itemName}</span>
+                    <span class="cart-item-price">€${flavour.price.toFixed(2)} x ${qty} = €${itemTotal.toFixed(2)}</span>
+                </div>
             </div>
             <div class="cart-item-controls">
                 <button class="cart-qty-btn minus" data-id="${id}">
@@ -110,18 +112,12 @@ function updateCartDisplay() {
         list.appendChild(li);
     }
     
-    // Update total
-    const totalEl = cartOverlay.querySelector('.cart-total');
-    if (totalEl) {
-        const totalText = currentLanguage === 'el' ? 'Σύνολο' : 'Total';
-        totalEl.textContent = `${totalText}: €${total.toFixed(2)}`;
-    }
-    
     // Show empty message if no items
     if (list.children.length === 0) {
         // Remove total element if it exists
-        if (totalEl) {
-            totalEl.remove();
+        const existingTotalEl = cartOverlay.querySelector('.cart-total');
+        if (existingTotalEl) {
+            existingTotalEl.remove();
         }
         
         // Remove WhatsApp button if it exists
@@ -137,11 +133,27 @@ function updateCartDisplay() {
         empty.style.marginTop = 'auto';
         cartOverlay.appendChild(empty);
     } else {
-        // Remove existing WhatsApp button if it exists
+        // Remove existing total and WhatsApp button if they exist
+        const existingTotalEl = cartOverlay.querySelector('.cart-total');
+        if (existingTotalEl) {
+            existingTotalEl.remove();
+        }
         const existingWhatsappBtn = cartOverlay.querySelector('.whatsapp-order-btn');
         if (existingWhatsappBtn) {
             existingWhatsappBtn.remove();
         }
+        
+        // Add Total section
+        const totalEl = document.createElement('div');
+        totalEl.className = 'cart-total';
+        const totalText = currentLanguage === 'el' ? 'Σύνολο' : 'Total';
+        totalEl.innerHTML = `
+            <div class="cart-total-content">
+                <span class="cart-total-label">${totalText}:</span>
+                <span class="cart-total-amount">€${total.toFixed(2)}</span>
+            </div>
+        `;
+        cartOverlay.appendChild(totalEl);
         
         // Add WhatsApp Order Button
         const whatsappBtn = document.createElement('button');

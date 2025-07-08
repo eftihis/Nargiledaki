@@ -703,6 +703,13 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
+.cart-item-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
 .cart-item-name {
     font-weight: 500;
     color: var(--text-color);
@@ -799,7 +806,6 @@ body {
     justify-content: center;
     gap: 0.5rem;
     transition: all 0.2s ease;
-    margin-top: auto;
     box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
 }
 
