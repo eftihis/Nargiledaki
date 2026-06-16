@@ -1,0 +1,527 @@
+[
+  {
+    "_id": "0e33075b-5ab4-459b-9509-b4a1e53b9ee6",
+    "colour": {
+      "_type": "color",
+      "alpha": 1,
+      "hex": "#d0d697",
+      "hsl": {
+        "_type": "hslaColor",
+        "a": 1,
+        "h": 65.71428571428572,
+        "l": 0.7156862745098039,
+        "s": 0.4344827586206898
+      },
+      "hsv": {
+        "_type": "hsvaColor",
+        "a": 1,
+        "h": 65.71428571428572,
+        "s": 0.294392523364486,
+        "v": 0.8392156862745098
+      },
+      "rgb": {
+        "_type": "rgbaColor",
+        "a": 1,
+        "b": 151,
+        "g": 214,
+        "r": 208
+      }
+    },
+    "description": {
+      "_type": "localeText",
+      "el": "Παγωμένο Μοσχολέμονο",
+      "en": "Frosted Lime"
+    },
+    "imageAlt": null,
+    "imageUrl": "https://cdn.sanity.io/images/hfmr6n6v/production/ad56dcebf4fabd77acad2ec89732da737ff61da9-1200x1500.jpg",
+    "name": {
+      "_type": "localeString",
+      "el": "Lime Chill",
+      "en": "Lime Chill"
+    },
+    "order": null,
+    "price": 23,
+    "slug": {
+      "_type": "slug",
+      "current": "lime-chill"
+    },
+    "smokingTime": 60,
+    "tags": null,
+    "textColor": {
+      "_type": "color",
+      "alpha": 1,
+      "hex": "#163b32",
+      "hsl": {
+        "_type": "hslaColor",
+        "a": 1,
+        "h": 165.4054054054054,
+        "l": 0.1588235294117647,
+        "s": 0.4567901234567902
+      },
+      "hsv": {
+        "_type": "hsvaColor",
+        "a": 1,
+        "h": 165.4054054054054,
+        "s": 0.6271186440677966,
+        "v": 0.23137254901960785
+      },
+      "rgb": {
+        "_type": "rgbaColor",
+        "a": 1,
+        "b": 50,
+        "g": 59,
+        "r": 22
+      }
+    }
+  },
+  {
+    "_id": "22287c17-d803-4576-a828-679754e4da3c",
+    "colour": {
+      "_type": "color",
+      "alpha": 1,
+      "hex": "#f0ae59",
+      "hsl": {
+        "_type": "hslaColor",
+        "a": 1,
+        "h": 33.7748344370861,
+        "l": 0.6450980392156862,
+        "s": 0.8342541436464088
+      },
+      "hsv": {
+        "_type": "hsvaColor",
+        "a": 1,
+        "h": 33.7748344370861,
+        "s": 0.6291666666666667,
+        "v": 0.9411764705882353
+      },
+      "rgb": {
+        "_type": "rgbaColor",
+        "a": 1,
+        "b": 89,
+        "g": 174,
+        "r": 240
+      }
+    },
+    "description": {
+      "_type": "localeText",
+      "el": "Ροδάκινο, Φρούτο του πάθους, λίτσι, βερίκοκο, πάγος",
+      "en": "Peach, passionfruit, lychee, apricot, ice"
+    },
+    "imageAlt": null,
+    "imageUrl": "https://cdn.sanity.io/images/hfmr6n6v/production/36cb8fc1a084c7c02c1fd5faea639fe4a588e623-1200x1500.jpg",
+    "name": {
+      "_type": "localeString",
+      "el": "Tropical",
+      "en": "Tropical"
+    },
+    "order": null,
+    "price": 23,
+    "slug": {
+      "_type": "slug",
+      "current": "tropical"
+    },
+    "smokingTime": 60,
+    "tags": null,
+    "textColor": {
+      "_type": "color",
+      "alpha": 1,
+      "hex": "#cf4527",
+      "hsl": {
+        "_type": "hslaColor",
+        "a": 1,
+        "h": 10.714285714285712,
+        "l": 0.4823529411764706,
+        "s": 0.6829268292682926
+      },
+      "hsv": {
+        "_type": "hsvaColor",
+        "a": 1,
+        "h": 10.714285714285712,
+        "s": 0.8115942028985507,
+        "v": 0.8117647058823529
+      },
+      "rgb": {
+        "_type": "rgbaColor",
+        "a": 1,
+        "b": 39,
+        "g": 69,
+        "r": 207
+      }
+    }
+  },
+  {
+    "_id": "41913187-8223-4135-b638-b24d71f05bcd",
+    "colour": {
+      "_type": "color",
+      "alpha": 1,
+      "hex": "#cae0e5",
+      "hsl": {
+        "_type": "hslaColor",
+        "a": 1,
+        "h": 191.11111111111111,
+        "l": 0.8450980392156863,
+        "s": 0.3417721518987343
+      },
+      "hsv": {
+        "_type": "hsvaColor",
+        "a": 1,
+        "h": 191.11111111111111,
+        "s": 0.11790393013100443,
+        "v": 0.8980392156862745
+      },
+      "rgb": {
+        "_type": "rgbaColor",
+        "a": 1,
+        "b": 229,
+        "g": 224,
+        "r": 202
+      }
+    },
+    "description": {
+      "_type": "localeText",
+      "el": "Μύρτιλο, καρύδα",
+      "en": "Blueberry, Coconut"
+    },
+    "imageAlt": null,
+    "imageUrl": "https://cdn.sanity.io/images/hfmr6n6v/production/09e8afab2c98e33f1ab56f1b4566682c8a3f7876-1200x1500.jpg",
+    "name": {
+      "_type": "localeString",
+      "el": "White Bull",
+      "en": "White Bull"
+    },
+    "order": null,
+    "price": 23,
+    "slug": {
+      "_type": "slug",
+      "current": "white-bull"
+    },
+    "smokingTime": 60,
+    "tags": null,
+    "textColor": {
+      "_type": "color",
+      "alpha": 1,
+      "hex": "#326b8b",
+      "hsl": {
+        "_type": "hslaColor",
+        "a": 1,
+        "h": 201.5730337078652,
+        "l": 0.3705882352941176,
+        "s": 0.47089947089947093
+      },
+      "hsv": {
+        "_type": "hsvaColor",
+        "a": 1,
+        "h": 201.5730337078652,
+        "s": 0.6402877697841727,
+        "v": 0.5450980392156862
+      },
+      "rgb": {
+        "_type": "rgbaColor",
+        "a": 1,
+        "b": 139,
+        "g": 107,
+        "r": 50
+      }
+    }
+  },
+  {
+    "_id": "7f0e0700-5c53-4fa3-81b6-1d1f7f8aa214",
+    "colour": {
+      "_type": "color",
+      "alpha": 1,
+      "hex": "#eed434",
+      "hsl": {
+        "_type": "hslaColor",
+        "a": 1,
+        "h": 51.61290322580645,
+        "l": 0.5686274509803921,
+        "s": 0.8454545454545455
+      },
+      "hsv": {
+        "_type": "hsvaColor",
+        "a": 1,
+        "h": 51.61290322580645,
+        "s": 0.7815126050420169,
+        "v": 0.9333333333333333
+      },
+      "rgb": {
+        "_type": "rgbaColor",
+        "a": 1,
+        "b": 52,
+        "g": 212,
+        "r": 238
+      }
+    },
+    "description": {
+      "_type": "localeText",
+      "el": "Λεμόνι",
+      "en": "Lemon"
+    },
+    "imageAlt": null,
+    "imageUrl": "https://cdn.sanity.io/images/hfmr6n6v/production/62546ce400782e7469a33fa903186b060364ec98-1200x1593.jpg",
+    "name": {
+      "_type": "localeString",
+      "el": "Zesty Lemon",
+      "en": "Zesty Lemon"
+    },
+    "order": null,
+    "price": 23,
+    "slug": {
+      "_type": "slug",
+      "current": "lemon"
+    },
+    "smokingTime": 60,
+    "tags": null,
+    "textColor": {
+      "_type": "color",
+      "alpha": 1,
+      "hex": "#72570b",
+      "hsl": {
+        "_type": "hslaColor",
+        "a": 1,
+        "h": 44.186046511627914,
+        "l": 0.2452398,
+        "s": 0.8288222384784198
+      },
+      "hsv": {
+        "_type": "hsvaColor",
+        "a": 1,
+        "h": 44.186046511627914,
+        "s": 0.9064,
+        "v": 0.4485
+      },
+      "rgb": {
+        "_type": "rgbaColor",
+        "a": 1,
+        "b": 11,
+        "g": 87,
+        "r": 114
+      }
+    }
+  },
+  {
+    "_id": "90e0798f-c5b4-43e0-a5fb-52d63b468b5a",
+    "colour": {
+      "_type": "color",
+      "alpha": 1,
+      "hex": "#61081e",
+      "hsl": {
+        "_type": "hslaColor",
+        "a": 1,
+        "h": 345.1685393258427,
+        "l": 0.20588235294117646,
+        "s": 0.8476190476190476
+      },
+      "hsv": {
+        "_type": "hsvaColor",
+        "a": 1,
+        "h": 345.1685393258427,
+        "s": 0.9175257731958762,
+        "v": 0.3803921568627451
+      },
+      "rgb": {
+        "_type": "rgbaColor",
+        "a": 1,
+        "b": 30,
+        "g": 8,
+        "r": 97
+      }
+    },
+    "description": {
+      "_type": "localeText",
+      "el": "Ανάμεικτα φρούτα του δάσους",
+      "en": "Mixed forest berries"
+    },
+    "imageAlt": null,
+    "imageUrl": "https://cdn.sanity.io/images/hfmr6n6v/production/393e57cdb0a17f5b19d12543d598136ec81f1bf8-1200x1500.jpg",
+    "name": {
+      "_type": "localeString",
+      "el": "Berry Mix",
+      "en": "Berry Mix"
+    },
+    "order": null,
+    "price": 23,
+    "slug": {
+      "_type": "slug",
+      "current": "berry-mix"
+    },
+    "smokingTime": 60,
+    "tags": null,
+    "textColor": {
+      "_type": "color",
+      "alpha": 1,
+      "hex": "#f6bcb5",
+      "hsl": {
+        "_type": "hslaColor",
+        "a": 1,
+        "h": 6.461538461538465,
+        "l": 0.8372549019607843,
+        "s": 0.7831325301204822
+      },
+      "hsv": {
+        "_type": "hsvaColor",
+        "a": 1,
+        "h": 6.461538461538465,
+        "s": 0.26422764227642276,
+        "v": 0.9647058823529412
+      },
+      "rgb": {
+        "_type": "rgbaColor",
+        "a": 1,
+        "b": 181,
+        "g": 188,
+        "r": 246
+      }
+    }
+  },
+  {
+    "_id": "a61b744f-c00c-4991-b65f-bd5043ceea8e",
+    "colour": {
+      "_type": "color",
+      "alpha": 1,
+      "hex": "#870523",
+      "hsl": {
+        "_type": "hslaColor",
+        "a": 1,
+        "h": 346.3636363636363,
+        "l": 0.275521505,
+        "s": 0.9232618521011637
+      },
+      "hsv": {
+        "_type": "hsvaColor",
+        "a": 1,
+        "h": 346.3636363636363,
+        "s": 0.9601000000000001,
+        "v": 0.5299
+      },
+      "rgb": {
+        "_type": "rgbaColor",
+        "a": 1,
+        "b": 35,
+        "g": 5,
+        "r": 135
+      }
+    },
+    "description": {
+      "_type": "localeText",
+      "el": "Σμέουρα",
+      "en": "Raspberry"
+    },
+    "imageAlt": null,
+    "imageUrl": "https://cdn.sanity.io/images/hfmr6n6v/production/2ee10533b02764f26e8c4e17f527bb9b3f692ac1-1200x1593.jpg",
+    "name": {
+      "_type": "localeString",
+      "el": "Crimson Raspberry",
+      "en": "Crimson Raspberry"
+    },
+    "order": null,
+    "price": 23,
+    "slug": {
+      "_type": "slug",
+      "current": "crimson-raspberry"
+    },
+    "smokingTime": 60,
+    "tags": null,
+    "textColor": {
+      "_type": "color",
+      "alpha": 1,
+      "hex": "#ff9c97",
+      "hsl": {
+        "_type": "hslaColor",
+        "a": 1,
+        "h": 2.937062937062936,
+        "l": 0.7964,
+        "s": 1
+      },
+      "hsv": {
+        "_type": "hsvaColor",
+        "a": 1,
+        "h": 2.937062937062936,
+        "s": 0.4072,
+        "v": 1
+      },
+      "rgb": {
+        "_type": "rgbaColor",
+        "a": 1,
+        "b": 151,
+        "g": 156,
+        "r": 255
+      }
+    }
+  },
+  {
+    "_id": "b374df2f-5be1-4899-96da-273f36eea5d0",
+    "colour": {
+      "_type": "color",
+      "alpha": 1,
+      "hex": "#013a53",
+      "hsl": {
+        "_type": "hslaColor",
+        "a": 1,
+        "h": 198.29268292682926,
+        "l": 0.16470588235294117,
+        "s": 0.9761904761904763
+      },
+      "hsv": {
+        "_type": "hsvaColor",
+        "a": 1,
+        "h": 198.29268292682926,
+        "s": 0.9879518072289157,
+        "v": 0.3254901960784314
+      },
+      "rgb": {
+        "_type": "rgbaColor",
+        "a": 1,
+        "b": 83,
+        "g": 58,
+        "r": 1
+      }
+    },
+    "description": {
+      "_type": "localeText",
+      "el": "Μάνγκο, καρπούζι, μείγμα μούρων",
+      "en": "Mango, Watermelon, Mixed Berries"
+    },
+    "imageAlt": null,
+    "imageUrl": "https://cdn.sanity.io/images/hfmr6n6v/production/7b059803487bab11a587e8c7677aff76ca6bf183-1200x1500.jpg",
+    "name": {
+      "_type": "localeString",
+      "el": "Casanova",
+      "en": "Casanova"
+    },
+    "order": null,
+    "price": 20,
+    "slug": {
+      "_type": "slug",
+      "current": "casanova"
+    },
+    "smokingTime": 60,
+    "tags": null,
+    "textColor": {
+      "_type": "color",
+      "alpha": 1,
+      "hex": "#cfebef",
+      "hsl": {
+        "_type": "hslaColor",
+        "a": 1,
+        "h": 187.5,
+        "l": 0.8745098039215686,
+        "s": 0.5
+      },
+      "hsv": {
+        "_type": "hsvaColor",
+        "a": 1,
+        "h": 187.5,
+        "s": 0.13389121338912133,
+        "v": 0.9372549019607843
+      },
+      "rgb": {
+        "_type": "rgbaColor",
+        "a": 1,
+        "b": 239,
+        "g": 235,
+        "r": 207
+      }
+    }
+  }
+]

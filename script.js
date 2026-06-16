@@ -1,8 +1,3 @@
-// Sanity configuration
-const SANITY_PROJECT_ID = 'hfmr6n6v';
-const SANITY_DATASET = 'production';
-const SANITY_API_VERSION = '2023-05-03';
-
 // Current language state
 let currentLanguage = 'en';
 
@@ -262,26 +257,6 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// GROQ query to fetch flavours with all needed data
-const FLAVOURS_QUERY = `
-*[_type == "flavour"] | order(order asc) {
-  _id,
-  name,
-  description,
-  price,
-  smokingTime,
-  colour,
-  textColor,
-  order,
-  "imageUrl": image.asset->url,
-  "imageAlt": image.alt,
-  slug,
-  tags[]-> {
-    title,
-    "iconUrl": icon.asset->url
-  }
-}
-`;
 
 // Initialize the application
 async function init() {
@@ -329,24 +304,18 @@ function updateLanguage() {
     }
 }
 
-// Fetch flavours from Sanity using CORS proxy
+// Load pre-built flavour data from static JSON
 async function fetchFlavours() {
     try {
-        console.log('Fetching flavours via CORS proxy...');
-        const sanityUrl = `https://${SANITY_PROJECT_ID}.api.sanity.io/v${SANITY_API_VERSION}/data/query/${SANITY_DATASET}?query=${encodeURIComponent(FLAVOURS_QUERY)}`;
-        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(sanityUrl)}`;
-        
-        const proxyResponse = await fetch(proxyUrl);
-        if (!proxyResponse.ok) {
-            throw new Error(`Proxy error! status: ${proxyResponse.status} - ${proxyResponse.statusText}`);
+        const response = await fetch('./data/flavours.json');
+        if (!response.ok) {
+            throw new Error(`Failed to load flavours: ${response.status}`);
         }
-        
-        const proxyData = await proxyResponse.json();
-        const sanityData = JSON.parse(proxyData.contents);
-        console.log('Successfully fetched', sanityData.result?.length || 0, 'flavours');
-        return sanityData.result || [];
+        const flavours = await response.json();
+        console.log('Loaded', flavours.length, 'flavours');
+        return flavours;
     } catch (error) {
-        console.error('Error fetching flavours:', error);
+        console.error('Error loading flavours:', error);
         return [];
     }
 }
