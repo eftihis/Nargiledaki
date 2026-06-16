@@ -225,6 +225,81 @@
     }
   },
   {
+    "_id": "59a27043-236b-4022-9c74-59b9d6760053",
+    "colour": {
+      "_type": "color",
+      "alpha": 1,
+      "hex": "#a32b32",
+      "hsl": {
+        "_type": "hslaColor",
+        "a": 1,
+        "h": 356.5,
+        "l": 0.403921568627451,
+        "s": 0.5825242718446602
+      },
+      "hsv": {
+        "_type": "hsvaColor",
+        "a": 1,
+        "h": 356.5,
+        "s": 0.7361963190184049,
+        "v": 0.6392156862745098
+      },
+      "rgb": {
+        "_type": "rgbaColor",
+        "a": 1,
+        "b": 50,
+        "g": 43,
+        "r": 163
+      }
+    },
+    "description": {
+      "_type": "localeText",
+      "el": "Πέρσικο blend μήλο",
+      "en": "Persian apple blend"
+    },
+    "imageAlt": null,
+    "imageUrl": "https://cdn.sanity.io/images/hfmr6n6v/production/76c8ba0448fea6c43ba01428fd362c36f9613f78-1122x1402.png",
+    "name": {
+      "_type": "localeString",
+      "el": "Πέρσικο Μληλο",
+      "en": "Persian Apple"
+    },
+    "order": null,
+    "price": 23,
+    "slug": {
+      "_type": "slug",
+      "current": "persian-apple"
+    },
+    "smokingTime": 60,
+    "tags": null,
+    "textColor": {
+      "_type": "color",
+      "alpha": 1,
+      "hex": "#fff2f3",
+      "hsl": {
+        "_type": "hslaColor",
+        "a": 1,
+        "h": 356.5000000000001,
+        "l": 0.9749,
+        "s": 1
+      },
+      "hsv": {
+        "_type": "hsvaColor",
+        "a": 1,
+        "h": 356.5000000000001,
+        "s": 0.05020000000000002,
+        "v": 1
+      },
+      "rgb": {
+        "_type": "rgbaColor",
+        "a": 1,
+        "b": 243,
+        "g": 242,
+        "r": 255
+      }
+    }
+  },
+  {
     "_id": "7f0e0700-5c53-4fa3-81b6-1d1f7f8aa214",
     "colour": {
       "_type": "color",
