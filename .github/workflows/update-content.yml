@@ -1,0 +1,27 @@
+name: Update Sanity Content
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [sanity-update]
+
+jobs:
+  fetch-and-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch content from Sanity
+        run: node build.js
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/flavours.json
+          git diff --cached --quiet || git commit -m "chore: update flavours from Sanity"
+          git push
